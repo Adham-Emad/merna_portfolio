@@ -1,26 +1,18 @@
 import { useState, useEffect } from 'react';
 import { useAdmin } from '@/context/AdminContext';
 import { toast } from 'sonner';
-import { Save, Settings, Lock, Globe, Eye, EyeOff } from 'lucide-react';
+import { Save, Settings, Globe } from 'lucide-react';
 
 export function SettingsEditor() {
   const { data, updateData } = useAdmin();
-  const [adminPassword, setAdminPassword] = useState(data.settings.adminPassword);
   const [siteTitle, setSiteTitle] = useState(data.settings.siteTitle);
   const [siteDescription, setSiteDescription] = useState(data.settings.siteDescription);
-  const [showPassword, setShowPassword] = useState(false);
   const [hasChanges, setHasChanges] = useState(false);
 
   useEffect(() => {
-    setAdminPassword(data.settings.adminPassword);
     setSiteTitle(data.settings.siteTitle);
     setSiteDescription(data.settings.siteDescription);
   }, [data.settings]);
-
-  const handlePasswordChange = (value: string) => {
-    setAdminPassword(value);
-    setHasChanges(true);
-  };
 
   const handleSiteTitleChange = (value: string) => {
     setSiteTitle(value);
@@ -33,15 +25,9 @@ export function SettingsEditor() {
   };
 
   const handleSave = () => {
-    if (adminPassword.length < 4) {
-      toast.error('Password must be at least 4 characters');
-      return;
-    }
-
     updateData({
       ...data,
       settings: {
-        adminPassword,
         siteTitle,
         siteDescription,
       },
@@ -59,41 +45,11 @@ export function SettingsEditor() {
           </div>
           <div>
             <h2 className="text-lg font-semibold text-white">Settings</h2>
-            <p className="text-[#666] text-sm">Manage admin and site settings</p>
+            <p className="text-[#666] text-sm">Manage site settings</p>
           </div>
         </div>
 
         <div className="space-y-8">
-          {/* Admin Password */}
-          <div className="bg-[#0F0F0F] border border-[#2A2A2A] rounded-lg p-4">
-            <div className="flex items-center gap-3 mb-4">
-              <Lock className="w-5 h-5 text-[#3B82F6]" />
-              <h3 className="text-white font-medium">Admin Access</h3>
-            </div>
-
-            <div>
-              <label className="block text-[#A0A0A0] text-sm mb-2">Admin Password</label>
-              <div className="relative">
-                <input
-                  type={showPassword ? 'text' : 'password'}
-                  value={adminPassword}
-                  onChange={(e) => handlePasswordChange(e.target.value)}
-                  className="w-full bg-[#1A1A1A] border border-[#2A2A2A] rounded-lg px-4 py-3 pr-12 text-white focus:outline-none focus:border-[#3B82F6] transition-colors"
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-[#666] hover:text-white transition-colors"
-                >
-                  {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
-                </button>
-              </div>
-              <p className="text-[#666] text-sm mt-2">
-                This password is required to access the admin panel.
-              </p>
-            </div>
-          </div>
-
           {/* Site Settings */}
           <div className="bg-[#0F0F0F] border border-[#2A2A2A] rounded-lg p-4">
             <div className="flex items-center gap-3 mb-4">
@@ -159,6 +115,9 @@ export function SettingsEditor() {
           </p>
           <p className="text-[#666] mt-4">
             The admin panel is hidden from normal visitors. Only you can access it with the password.
+          </p>
+          <p className="text-[#666] mt-4">
+            <span className="text-white">Note:</span> The admin password is managed via environment variables for security.
           </p>
         </div>
       </div>

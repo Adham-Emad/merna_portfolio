@@ -18,17 +18,30 @@ export function AdminLogin({ onLogin }: AdminLoginProps) {
     setError('');
     setIsLoading(true);
 
-    // Simulate loading for better UX
-    await new Promise((resolve) => setTimeout(resolve, 500));
+    try {
+      const response = await fetch('/api/validate-password', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-admin-password': password,
+        },
+        body: JSON.stringify({}),
+      });
 
-    const success = login(password);
-    if (success) {
-      onLogin();
-    } else {
-      setError('Incorrect password. Please try again.');
+      if (response.ok) {
+        const success = login(password);
+        if (success) {
+          onLogin();
+        }
+      } else {
+        setError('Incorrect password. Please try again.');
+      }
+    } catch (error) {
+      setError('Error validating password. Please try again.');
+      console.error('Login error:', error);
+    } finally {
+      setIsLoading(false);
     }
-
-    setIsLoading(false);
   };
 
   return (

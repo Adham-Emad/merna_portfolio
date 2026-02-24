@@ -72,7 +72,6 @@ export interface PortfolioData {
   };
   contact: ContactData;
   settings: {
-    adminPassword: string;
     siteTitle: string;
     siteDescription: string;
   };
@@ -254,7 +253,6 @@ export const defaultPortfolioData: PortfolioData = {
     linkedin: "https://linkedin.com/in/yourusername",
   },
   settings: {
-    adminPassword: "admin123",
     siteTitle: "Merna Bahgat - Flutter Developer",
     siteDescription: "Portfolio of Merna Bahgat, a Flutter Developer building real applications",
   },

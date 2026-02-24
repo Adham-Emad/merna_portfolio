@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useCallback } from 'react';
+import React, { createContext, useContext, useState, useCallback, useEffect } from 'react';
 import type { AdminContextType } from '@/types';
 import { usePortfolioData } from '@/hooks/usePortfolioData';
 
@@ -9,15 +9,17 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
   const portfolioData = usePortfolioData();
 
   const login = useCallback((password: string): boolean => {
-    if (password === portfolioData.data.settings.adminPassword) {
-      setIsAdmin(true);
-      return true;
-    }
-    return false;
-  }, [portfolioData.data.settings.adminPassword]);
+    // The admin password is validated server-side
+    // We just store it temporarily for API calls during this session
+    localStorage.setItem('admin_password_temp', password);
+    setIsAdmin(true);
+    return true;
+  }, []);
 
   const logout = useCallback(() => {
     setIsAdmin(false);
+    // Clear temporary password on logout
+    localStorage.removeItem('admin_password_temp');
   }, []);
 
   const value: AdminContextType = {
