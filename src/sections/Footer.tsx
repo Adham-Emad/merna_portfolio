@@ -1,6 +1,5 @@
 import { useAdmin } from '@/context/AdminContext';
-import { Heart, Code } from 'lucide-react';
-
+import { /* باقي الأيقونات */ } from 'react-feather';
 export function Footer() {
   const { data } = useAdmin();
   const currentYear = new Date().getFullYear();
