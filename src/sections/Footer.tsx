@@ -1,5 +1,5 @@
 import { useAdmin } from '@/context/AdminContext';
-import { Heart, Code } from 'lucide-react';
+import { Code } from 'lucide-react';
 
 export function Footer() {
   const { data } = useAdmin();
