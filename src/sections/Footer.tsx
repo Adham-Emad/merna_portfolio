@@ -24,11 +24,7 @@ export function Footer() {
 
           {/* Copyright */}
           <div className="flex items-center gap-2 text-[#666] text-sm">
-            <span>© {currentYear}</span>
-            <span>•</span>
-            <span>Built with</span>
-            <Heart className="w-4 h-4 text-[#3B82F6] fill-[#3B82F6]" />
-            <span>and Flutter</span>
+            <span>© {currentYear} {data.hero.firstName} {data.hero.lastName}</span>
           </div>
 
           {/* Quick links */}

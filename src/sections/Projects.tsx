@@ -67,10 +67,10 @@ export function Projects() {
   return (
     <section ref={sectionRef} className="relative bg-[#0F0F0F]">
       {/* Section header */}
-      <div className="absolute top-8 left-8 z-20 pointer-events-none">
+      <div className="absolute top-8 left-8 z-10 pointer-events-none max-w-xs md:max-w-md">
         <div className="text-[#666] text-sm uppercase tracking-widest mb-2">Projects</div>
-        <h2 className="text-3xl md:text-5xl font-black text-white leading-tight">{data.projects.title}</h2>
-        <p className="text-[#A0A0A0] mt-3 text-sm md:text-base">{data.projects.subtitle}</p>
+        <h2 className="text-2xl md:text-4xl font-black text-white leading-tight break-words">{data.projects.title}</h2>
+        <p className="text-[#A0A0A0] mt-3 text-xs md:text-sm">{data.projects.subtitle}</p>
       </div>
 
       {/* Horizontal slider container */}
@@ -138,14 +138,14 @@ export function Projects() {
                   </div>
 
                   {/* Links */}
-                  <div className="flex gap-4">
+                  <div className="flex flex-wrap gap-3 pt-2">
                     <a
                       href={project.githubLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-6 py-3 bg-[#1A1A1A] text-white rounded hover:bg-[#2A2A2A] transition-colors"
+                      className="inline-flex items-center gap-2 px-5 py-2 bg-[#1A1A1A] text-white text-sm rounded-lg border border-[#2A2A2A] hover:bg-[#2A2A2A] hover:border-[#3B82F6] transition-all duration-300 z-30 relative"
                     >
-                      <Github className="w-5 h-5" />
+                      <Github className="w-4 h-4 flex-shrink-0" />
                       <span>View Code</span>
                     </a>
                     {project.liveLink && (
@@ -153,9 +153,9 @@ export function Projects() {
                         href={project.liveLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-2 px-6 py-3 bg-[#3B82F6] text-white rounded hover:bg-[#2563EB] transition-colors"
+                        className="inline-flex items-center gap-2 px-5 py-2 bg-[#3B82F6] text-white text-sm rounded-lg hover:bg-[#2563EB] transition-all duration-300 z-30 relative"
                       >
-                        <ExternalLink className="w-5 h-5" />
+                        <ExternalLink className="w-4 h-4 flex-shrink-0" />
                         <span>Live Demo</span>
                       </a>
                     )}
